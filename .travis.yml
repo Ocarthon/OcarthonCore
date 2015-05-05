@@ -8,3 +8,8 @@ env:
 
 after_success:
     - ./gradlew jacocoTestReport coveralls
+
+notifications:
+    email:
+        on_success: always
+        on_failure: always
