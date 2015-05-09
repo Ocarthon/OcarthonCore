@@ -85,7 +85,7 @@ public class LoopedThreadTest {
         Thread.sleep(11);
         thread.stopThread();
 
-        assertTrue(Math.abs(count - 6) <= 1);
+        assertTrue(Math.abs(count - 6) <= 2);
     }
 
     private class DefaultLoopedThread extends LoopedThread {
