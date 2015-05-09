@@ -68,7 +68,7 @@ public class LoopedThreadTest {
             }
         };
         thread.start();
-        Thread.sleep(1);
+        Thread.sleep(3);
 
         assertFalse(thread.isRunning());
     }
@@ -85,7 +85,7 @@ public class LoopedThreadTest {
         Thread.sleep(11);
         thread.stopThread();
 
-        assertTrue(Math.abs(count - 6) <= 2);
+        assertTrue(Math.abs(count - 5) <= 2);
     }
 
     private class DefaultLoopedThread extends LoopedThread {
