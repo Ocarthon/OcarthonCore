@@ -122,7 +122,7 @@ public abstract class LoopedThread extends Thread {
      *
      * @throws InterruptedException if the thread is interrupted
      */
-    private void internalExecute() throws InterruptedException {
+    public void internalExecute() throws InterruptedException {
         execute();
 
         if (waitMs > 0) {
