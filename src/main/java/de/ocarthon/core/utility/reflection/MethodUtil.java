@@ -16,8 +16,6 @@
 
 package de.ocarthon.core.utility.reflection;
 
-import com.sun.istack.internal.Nullable;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -44,7 +42,7 @@ public final class MethodUtil {
      * @throws java.lang.reflect.InvocationTargetException if the underlying
      *                                                     constructor throws an exception.
      */
-    public static Object invoke(Object object, String methodName, @Nullable Class[] argTypes, @Nullable Object... args) {
+    public static Object invoke(Object object, String methodName, Class[] argTypes, Object... args) {
         if (object == null) {
             throw new NullPointerException("the given object is null");
         }
