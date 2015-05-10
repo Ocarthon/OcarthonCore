@@ -68,7 +68,7 @@ public class LoopedThreadTest {
             }
         };
         thread.start();
-        Thread.sleep(3);
+        Thread.sleep(20);
 
         assertFalse(thread.isRunning());
     }

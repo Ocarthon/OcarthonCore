@@ -31,7 +31,7 @@ public class TicketThreadTest {
 
     @Test
     public void testTickedThread() throws Exception {
-        TicketThread thread = new TicketThread(100) {
+        TicketThread thread = new TicketThread(10) {
             @Override
             public void execute() throws InterruptedException {
                 executions++;
@@ -40,10 +40,10 @@ public class TicketThreadTest {
         };
 
         thread.start();
-        Thread.sleep(20);
+        Thread.sleep(200);
         thread.stopThread();
 
-        assertEquals(2, executions);
+        assertEquals(2, executions, 2);
     }
 
     @Test
