@@ -35,6 +35,13 @@ public class TicketThreadTest {
             @Override
             public void execute() throws InterruptedException {
                 executions++;
+
+                int unused = 0;
+
+                for (int i = 0; i < 10; i++) {
+                    unused += Integer.parseInt("" + i);
+                }
+
                 sleep(1);
             }
         };
