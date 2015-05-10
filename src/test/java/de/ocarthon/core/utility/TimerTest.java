@@ -69,6 +69,6 @@ public class TimerTest {
         timer.start();
         Thread.sleep(10);
 
-        assertEquals((int) timer.getElapsedTime() / 1000000, timer.getElapsedTime(TimeUnit.MILLISECONDS));
+        assertEquals((int) timer.getElapsedTime() / 1000000, timer.getElapsedTime(TimeUnit.MILLISECONDS), 2);
     }
 }
