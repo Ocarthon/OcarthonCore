@@ -47,10 +47,10 @@ public class TicketThreadTest {
         };
 
         thread.start();
-        Thread.sleep(200);
+        Thread.sleep(1200);
         thread.stopThread();
 
-        assertEquals(2, executions, 2);
+        assertEquals(12, executions, 2);
     }
 
     @Test
