@@ -16,8 +16,6 @@
 
 package de.ocarthon.core.utility.reflection;
 
-import com.sun.istack.internal.Nullable;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
@@ -52,7 +50,7 @@ public class ConstructorUtil {
      * @throws java.lang.ExceptionInInitializerError       if the initialization
      *                                                     provoked by this method fails.
      */
-    public static <T> T invokeConstructor(Class<T> clazz, @Nullable Class[] argTypes, @Nullable Object... args) {
+    public static <T> T invokeConstructor(Class<T> clazz, Class[] argTypes, Object... args) {
         if (clazz == null) throw new NullPointerException("Constructor is null");
 
         try {
