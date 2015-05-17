@@ -16,6 +16,7 @@
 
 package de.ocarthon.core.utility;
 
+import de.ocarthon.core.utility.reflection.ConstructorUtil;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -32,7 +33,7 @@ public class HexTest {
     @Test
     public void testToHexString() throws Exception {
         // coverage
-        new Hex();
+        ConstructorUtil.invokeConstructor(Hex.class, new Class[]{});
 
         assertArrayEquals(Hex.fromHexString(Hex.toHexString(content)),
                 content);

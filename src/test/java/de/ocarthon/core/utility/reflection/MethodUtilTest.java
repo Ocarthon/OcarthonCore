@@ -32,7 +32,7 @@ public class MethodUtilTest {
 
     @Test
     public void testInvokeNullPointerException() throws Exception {
-        new MethodUtil();
+        ConstructorUtil.invokeConstructor(MethodUtil.class, new Class[]{});
 
         exception.expect(NullPointerException.class);
         exception.expectMessage("the given object is null");

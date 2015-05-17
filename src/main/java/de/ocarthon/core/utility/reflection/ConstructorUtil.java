@@ -21,6 +21,9 @@ import java.lang.reflect.InvocationTargetException;
 
 public class ConstructorUtil {
 
+    private ConstructorUtil() {
+    }
+
     /**
      * Invokes a constructor of a given class.
      * <p>
@@ -56,6 +59,7 @@ public class ConstructorUtil {
         try {
             if (argTypes != null) {
                 Constructor<T> constructor = clazz.getDeclaredConstructor(argTypes);
+                constructor.setAccessible(true);
                 return constructor.newInstance(args);
             } else {
                 return clazz.newInstance();

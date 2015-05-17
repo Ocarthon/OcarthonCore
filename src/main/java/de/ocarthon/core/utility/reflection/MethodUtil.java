@@ -21,6 +21,9 @@ import java.lang.reflect.Method;
 
 public final class MethodUtil {
 
+    private MethodUtil() {
+    }
+
     /**
      * Invokes a method with the given name on the given object
      * <p>

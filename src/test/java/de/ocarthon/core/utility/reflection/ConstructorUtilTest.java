@@ -30,7 +30,7 @@ public class ConstructorUtilTest {
 
     @Test
     public void testInvokeConstructor() throws Exception {
-        new ConstructorUtil();
+        ConstructorUtil.invokeConstructor(ConstructorUtil.class, new Class[]{});
 
         BigInteger integer = ConstructorUtil.invokeConstructor(BigInteger.class, new Class[]{String.class}, "1");
         assertEquals(1, integer.intValue());

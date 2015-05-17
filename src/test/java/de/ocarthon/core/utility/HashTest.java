@@ -16,6 +16,7 @@
 
 package de.ocarthon.core.utility;
 
+import de.ocarthon.core.utility.reflection.ConstructorUtil;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -31,7 +32,7 @@ public class HashTest {
     @Test
     public void testHash() throws Exception {
         // only for coverage
-        new Hash();
+        ConstructorUtil.invokeConstructor(Hash.class, new Class[]{});
     }
 
     @Test

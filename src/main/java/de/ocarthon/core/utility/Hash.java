@@ -25,6 +25,8 @@ import java.security.NoSuchAlgorithmException;
  */
 public class Hash {
 
+    private Hash() {
+    }
 
     /**
      * hashes the input using the given algorithm. It is not possible to revert

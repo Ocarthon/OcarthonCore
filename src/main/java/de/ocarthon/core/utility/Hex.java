@@ -19,6 +19,9 @@ package de.ocarthon.core.utility;
 public class Hex {
     final private static char[] hexArray = "0123456789abcdef".toCharArray();
 
+    private Hex() {
+    }
+
     /**
      * converts the given bytes into a hex string. The characters from a to f
      * are lowercase.
