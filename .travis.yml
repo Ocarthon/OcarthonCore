@@ -6,6 +6,9 @@ jdk:
 env:
     - TERM=dumb
 
+before_install:
+    - ./install_flatbuffers.sh
+
 after_success:
     - ./gradlew jacocoTestReport coveralls
 

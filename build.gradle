@@ -25,6 +25,7 @@ version = '1.0.0'
 buildscript {
     repositories {
         mavenCentral()
+        mavenLocal()
     }
 
     dependencies {
@@ -52,9 +53,11 @@ publishing {
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile 'io.netty:netty-all:5.0.0.Alpha2'
+    compile 'com.google.flatbuffers:flatbuffers-java:+'
 }
