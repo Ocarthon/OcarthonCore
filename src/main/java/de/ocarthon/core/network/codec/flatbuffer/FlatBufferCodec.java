@@ -32,7 +32,6 @@ public class FlatBufferCodec extends MessageToMessageCodec<ByteBuf, FlatBufferBu
 
     public FlatBufferCodec(Class<? extends Table> rootClass) {
         String methodName = "getRootAs" + rootClass.getSimpleName();
-        System.out.println(methodName);
 
         try {
             method = rootClass.getDeclaredMethod(methodName, ByteBuffer.class);
