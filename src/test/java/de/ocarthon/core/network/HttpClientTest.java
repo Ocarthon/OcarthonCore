@@ -16,14 +16,13 @@
 
 package de.ocarthon.core.network;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.net.URI;
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -41,27 +40,14 @@ public class HttpClientTest {
     public ExpectedException exception = ExpectedException.none();
     private HttpClient defaultHttpClient;
     private List<Map.Entry<String, String>> postParameters;
-    private File file = new File("testFile.txt");
+    private ByteBuf testFile;
 
     @Before
     public void setUp() throws Exception {
         postParameters = new ArrayList<>();
         postParameters.add(new AbstractMap.SimpleEntry<>("t", "123"));
-
-        if (!file.exists() || !file.isDirectory()) {
-
-            BufferedWriter writer = null;
-            try {
-                writer = new BufferedWriter(new FileWriter(file));
-                writer.write("Test");
-            } finally {
-                if (writer != null) {
-                    writer.close();
-                }
-            }
-        }
-
         defaultHttpClient = new HttpClient("https", HOST);
+        testFile = Unpooled.wrappedBuffer("Test".getBytes());
     }
 
     @Test
@@ -137,7 +123,7 @@ public class HttpClientTest {
     @Test
     public void testPostRequestFileUpload() throws Exception {
         String result = defaultHttpClient.postRequest("index.html", postParameters,
-                "file.txt", file, null);
+                "test", "test.txt", testFile, null);
         assertNotNull(result);
         assertTrue(result.trim().charAt(0) == '<');
     }

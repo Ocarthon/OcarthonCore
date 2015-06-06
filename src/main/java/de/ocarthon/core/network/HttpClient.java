@@ -18,6 +18,7 @@ package de.ocarthon.core.network;
 
 import de.ocarthon.core.utility.reflection.MethodUtil;
 import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFactory;
@@ -46,13 +47,13 @@ import io.netty.handler.codec.http.HttpVersion;
 import io.netty.handler.codec.http.multipart.DefaultHttpDataFactory;
 import io.netty.handler.codec.http.multipart.HttpDataFactory;
 import io.netty.handler.codec.http.multipart.HttpPostRequestEncoder;
+import io.netty.handler.codec.http.multipart.MixedFileUpload;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import io.netty.handler.stream.ChunkedWriteHandler;
 import io.netty.util.CharsetUtil;
 
 import javax.net.ssl.TrustManagerFactory;
-import java.io.File;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
@@ -139,11 +140,11 @@ public class HttpClient {
 
     public synchronized String postRequest(String query, List<Map.Entry<String, String>>
             postParameters) {
-        return postRequest(query, postParameters, null, null, null);
+        return postRequest(query, postParameters, null, null, null, null);
     }
 
     public synchronized String postRequest(String query, List<Map.Entry<String, String>>
-            postParameters, String filePostName, File file, String mime) {
+            postParameters, String filePostName, String fileName, ByteBuf fileData, String mime) {
         if (bootstrap == null) {
             setupBootstrap();
         }
@@ -181,7 +182,7 @@ public class HttpClient {
                 }
             });
         }
-        boolean isFileAttached = file != null && file.canRead();
+        boolean isFileAttached = fileData != null && fileData.isReadable();
         HttpRequest request = new DefaultHttpRequest(HttpVersion.HTTP_1_1,
                 HttpMethod.POST, scheme + "://" + host + ":" + port + "/" + query);
         HttpPostRequestEncoder bodyReqEncoder;
@@ -196,7 +197,9 @@ public class HttpClient {
             if (isFileAttached) {
                 if (mime == null) mime = "application/octet-stream";
 
-                bodyReqEncoder.addBodyFileUpload(filePostName, file, mime, false);
+                MixedFileUpload mfu = new MixedFileUpload(filePostName, fileName, mime, "binary", null, fileData.capacity(), DefaultHttpDataFactory.MINSIZE);
+                mfu.addContent(fileData, true);
+                bodyReqEncoder.addBodyHttpData(mfu);
             }
 
             HttpHeaders headers = request.headers();
