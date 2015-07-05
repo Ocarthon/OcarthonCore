@@ -23,7 +23,7 @@ import static org.junit.Assert.assertEquals;
 public class TicketThreadTest {
     private int executions = 0;
 
-    private TicketThread defThread = new TicketThread(20) {
+    private TicketThread defThread = new TicketThread("Test", 20) {
         @Override
         public void execute() throws InterruptedException {
         }
@@ -31,7 +31,7 @@ public class TicketThreadTest {
 
     @Test
     public void testTickedThread() throws Exception {
-        TicketThread thread = new TicketThread(10) {
+        TicketThread thread = new TicketThread("Test", 10) {
             @Override
             public void execute() throws InterruptedException {
                 executions++;

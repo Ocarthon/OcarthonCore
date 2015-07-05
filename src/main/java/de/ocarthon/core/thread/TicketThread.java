@@ -22,7 +22,8 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * A utility class that provides a ticked thread. {@link #execute()} gets
- * called the number of times specified in the constructor {@link #TicketThread(int)}.
+ * called the number of times specified in the constructor
+ * {@link #TicketThread(String, int)}.
  */
 public abstract class TicketThread extends LoopedThread {
     /**
@@ -54,7 +55,8 @@ public abstract class TicketThread extends LoopedThread {
      *
      * @param ticks the number of timer the thread should run in a seconds
      */
-    public TicketThread(int ticks) {
+    public TicketThread(String name, int ticks) {
+        super(name);
         this.ticks = ticks;
         this.tickTime = 1000f / ((float) ticks);
     }

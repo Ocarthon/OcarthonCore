@@ -27,7 +27,7 @@ public class LoopedThreadTest {
 
     @Test
     public void testLoopedThread() throws Exception {
-        LoopedThread thread = new DefaultLoopedThread();
+        LoopedThread thread = new DefaultLoopedThread("Test");
         assertFalse(thread.isRunning());
 
         thread.start();
@@ -44,7 +44,7 @@ public class LoopedThreadTest {
 
     @Test
     public void testLoopedThreadInterrupt() throws Exception {
-        LoopedThread thread = new DefaultLoopedThread() {
+        LoopedThread thread = new DefaultLoopedThread("Test") {
             @Override
             public void postDispose() {
                 postExecuted = true;
@@ -61,7 +61,7 @@ public class LoopedThreadTest {
 
     @Test
     public void testLoopedThreadInterruptForced() throws Exception {
-        LoopedThread thread = new LoopedThread() {
+        LoopedThread thread = new LoopedThread("Test") {
             @Override
             public void execute() throws InterruptedException {
                 throw new InterruptedException();
@@ -75,7 +75,7 @@ public class LoopedThreadTest {
 
     @Test
     public void testLoopedThreadWait() throws Exception {
-        LoopedThread thread = new LoopedThread(2) {
+        LoopedThread thread = new LoopedThread("Test", 2) {
             @Override
             public void execute() throws InterruptedException {
                 count++;
@@ -89,6 +89,10 @@ public class LoopedThreadTest {
     }
 
     private class DefaultLoopedThread extends LoopedThread {
+
+        public DefaultLoopedThread(String name) {
+            super(name);
+        }
 
         @Override
         public void execute() {

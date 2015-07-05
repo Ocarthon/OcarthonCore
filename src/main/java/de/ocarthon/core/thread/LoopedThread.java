@@ -66,9 +66,10 @@ public abstract class LoopedThread extends Thread {
      *
      * @param waitMs the time in ms that the thread waits after each
      *               execution of {@link #execute()}
-     * @see #LoopedThread()
+     * @see #LoopedThread(String)
      */
-    public LoopedThread(int waitMs) {
+    public LoopedThread(String name, int waitMs) {
+        super(name);
         this.waitMs = waitMs;
     }
 
@@ -76,9 +77,10 @@ public abstract class LoopedThread extends Thread {
      * Creates a new LoopedThread instance. {@link #execute()} gets called without a
      * delay between the calls.
      *
-     * @see #LoopedThread(int)
+     * @see #LoopedThread(String, int)
      */
-    public LoopedThread() {
+    public LoopedThread(String name) {
+        super(name);
         this.waitMs = 0;
     }
 
