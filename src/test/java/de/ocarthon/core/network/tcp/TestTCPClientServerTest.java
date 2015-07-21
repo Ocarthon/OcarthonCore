@@ -66,12 +66,14 @@ public class TestTCPClientServerTest implements TCPListener {
 
         assertTrue(client.connect("127.0.0.1", 24313));
 
+        Thread.sleep(1000);
         server.getClients().writeAndFlush(Unpooled.wrappedBuffer("Test".getBytes()));
 
         synchronized (entry) {
-            entry.wait();
+            if (entry[0].isEmpty()) {
+                entry.wait();
+            }
         }
-
         assertFalse(entry[0].isEmpty());
 
         client.getChannel().close();
@@ -91,10 +93,10 @@ public class TestTCPClientServerTest implements TCPListener {
     @Override
     public void onMessageReceived(ChannelHandlerContext ctx, Object message) {
         String string = ((ByteBuf) message).toString(StandardCharsets.UTF_8);
-
+        
         synchronized (entry) {
             entry[0] = string;
-            entry.notify();
+            entry.notifyAll();
         }
     }
 
