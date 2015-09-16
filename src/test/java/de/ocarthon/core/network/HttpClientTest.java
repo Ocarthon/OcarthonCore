@@ -35,7 +35,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class HttpClientTest {
-    private static final String HOST = "ocarthon.de";
+    private static final String HOST = "google.com";
     @Rule
     public ExpectedException exception = ExpectedException.none();
     private HttpClient defaultHttpClient;
@@ -73,7 +73,7 @@ public class HttpClientTest {
 
     @Test
     public void testConstructor3() throws Exception {
-        URI uri = new URI("https://ocarthon.de");
+        URI uri = new URI("https://" + HOST);
         HttpClient client = new HttpClient(uri);
         assertEquals("https", client.getScheme());
         assertEquals(HOST, client.getHost());
